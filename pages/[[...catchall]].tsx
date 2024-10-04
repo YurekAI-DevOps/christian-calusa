@@ -72,7 +72,7 @@ const isAgency = (baseUrl: string): boolean => {
     /estates$/.test(baseUrl) || 
     /* /builder\/projects$/.test(baseUrl) || At the moment the MLS does not require Agency page built with builder-app */
     /estates/.test(url.pathname) && params.has('uuids') ||
-    /builder\/projects\/[0-9]+/.test(url.pathname) // && params.has('ids')
+    /builder\/projects$/.test(url.pathname) // && params.has('ids')
   )
 };
   
