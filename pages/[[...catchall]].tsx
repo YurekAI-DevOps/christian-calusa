@@ -122,7 +122,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
           if (isCockpit(baseUrl)) {
             items.push(...response.data.map(({ uuid }: any) => uuid));
           } else if (isMLS(baseUrl)) {
-            items.push(response?.items.map(({ idProject }: any) => idProject))
+            items.push(...response?.items.map(({ idProject }: any) => idProject))
           }
       }
     }
