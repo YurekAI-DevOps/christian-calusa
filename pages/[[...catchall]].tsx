@@ -120,11 +120,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
           if (isCockpit(baseUrl)) {
             return response.data.map(({ uuid }: any) => uuid) || [];
           } else if (isMLS(baseUrl)) {
-            if (response?.items) {
-              return response?.items.map(({ idProject }: any) => idProject) || [];
-            } else {
-              return [ response.idProject ] || [61, 62];
-            }
+            console.log("response mls:". response);
+          
+            return response?.items.map(({ idProject }: any) => idProject) || [];
             
           } else {
             return [];
