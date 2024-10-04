@@ -104,8 +104,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const dataSources = await getDataSources()
 
     for (const dataSource of dataSources) {
-      if (isAgency(dataSource.settings.baseUrl)) {
-        console.log('GET', dataSource.settings.baseUrl);
+      const { 
+        settings: { 
+          baseUrl,
+          commonHeaders: headers = {},
+        },
+      } = dataSource;
+        
+      if (isAgency(baseUrl)) {
+        console.log('GET', baseUrl);
         const response = await (await fetch(
             baseUrl, 
             {
