@@ -101,9 +101,27 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const pageModules = await PLASMIC.fetchPages();
   const items = [];
   try {
-    const response = await getDataSources()
-    
-    const results = await Promise.all(
+    const dataSources = await getDataSources()
+
+    for (const dataSource of dataSources) {
+      if (isAgency(dataSource.settings.baseUrl)) {
+        console.log('GET', dataSource.settings.baseUrl);
+        const response = await (await fetch(
+            baseUrl, 
+            {
+              headers: { ...headers }  
+            }
+          )).json()
+          if (isCockpit(baseUrl)) {
+            items.push(...response.data.map(({ uuid }: any) => uuid));
+          } else if (isMLS(baseUrl)) {
+            items.push(response?.items.map(({ idProject }: any) => idProject))
+          }
+      }
+    }
+
+    /*
+        const results = await Promise.all(
       response
         .filter(({settings: { baseUrl } }: any) => {
           return isAgency(baseUrl);
@@ -120,20 +138,22 @@ export const getStaticPaths: GetStaticPaths = async () => {
           if (isCockpit(baseUrl)) {
             return response.data.map(({ uuid }: any) => uuid) || [];
           } else if (isMLS(baseUrl)) {
-              console.log(response.items.map((item) => item.idProject) || []);
               return response?.items.map(({ idProject }: any) => idProject) || [];
           } else {
             return [];
           }
         }),
     );
-
-    console.log(results);
+    console.log("RESULTS\n", results);
 
     items.push(
       ...results[0]
-    );
+    );    
+    */
 
+
+
+    console.log("ITEMS");
     console.log(items);
 
   } catch (ex) {
