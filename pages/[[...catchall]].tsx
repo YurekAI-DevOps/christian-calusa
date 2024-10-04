@@ -124,9 +124,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
             console.log(response.idProject);
             if (response.idProject) {
               console.log("yeahhhh");
-              return [ 61, 62 ];
+              return [ response.idProject ];
+            } else {
+              return response?.items.map(({ idProject }: any) => idProject) || [];
             }
-            return response?.items.map(({ idProject }: any) => idProject) || [];
             
           } else {
             return [];
