@@ -121,7 +121,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
             return response.data.map(({ uuid }: any) => uuid) || [];
           } else if (isMLS(baseUrl)) {
             console.log("response mls:", response);
+            console.log(response.idProject);
             if (response.idProject) {
+              console.log("yeahhhh");
               return [ 61, 62 ];
             }
             return response?.items.map(({ idProject }: any) => idProject) || [];
