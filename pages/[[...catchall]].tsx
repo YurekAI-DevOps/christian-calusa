@@ -100,7 +100,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const pageModules = await PLASMIC.fetchPages();
   const items = [];
   try {
-    let response = await getDataSources()
+    const response = await getDataSources()
     
     const [ result ] = await Promise.all(
       response
