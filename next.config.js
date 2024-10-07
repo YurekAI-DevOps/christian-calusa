@@ -5,7 +5,7 @@ const nextConfig = {
   // has some troubles with it. See
   // https://github.com/adobe/react-spectrum/labels/strict%20mode
   output: 'export',
-  basePath: 'YOUR_REPO_NAME',
+  // basePath: 'YOUR_REPO_NAME',
   reactStrictMode: false,
 };
 
