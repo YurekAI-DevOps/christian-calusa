@@ -76,6 +76,13 @@ jobs:
           branch: ${{ github.event.client_payload.data.branch }}
           directory: ${{ github.event.client_payload.data.directory }}
           platform: ${{ github.event.client_payload.data.platform }}
+      # New step: Replace favicon with one from the main branch
+      - id: replace-favicon
+        name: Replacing favicon from main branch
+        run: |
+          git fetch origin main
+          git checkout origin/main -- public/favicon.ico
+          echo "Favicon replaced with the one from main branch."
       - id: gh-pages
         name: Publishing to GitHub Pages...
         uses: JamesIves/github-pages-deploy-action@4.1.0
